@@ -1,0 +1,30 @@
+---
+import { Turtle } from "@lucide/astro";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a">;
+
+const { class: className, href = "#inicio" } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "group inline-flex w-fit select-none items-center leading-none",
+    className,
+  ]}
+  data-scroll-to="inicio"
+>
+  <span class="inline-flex min-w-0 items-center gap-2 md:gap-2.5 leading-none">
+    <Turtle
+      class="h-7 w-7 shrink-0 text-tuga-brand md:h-8 md:w-8 lg:h-9 lg:w-9"
+      stroke-width={1.75}
+      aria-hidden="true"
+    />
+    <span
+      class="font-black tracking-[-0.06em] text-white text-[1.4rem] md:text-[1.55rem] lg:text-[1.7rem]"
+    >
+      Tuga<span class="text-tuga-brand">App</span>
+    </span>
+  </span>
+</a>

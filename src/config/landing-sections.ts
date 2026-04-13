@@ -12,5 +12,3 @@ export const SECTION_IDS_FOR_SPY = [
   ...NAV_LINKS.map((n) => n.id),
   "support",
 ] as const;
-
-export type NavLinkId = (typeof NAV_LINKS)[number]["id"];

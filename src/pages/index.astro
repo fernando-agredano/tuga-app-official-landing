@@ -1,9 +1,45 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 import "../styles/globals.css";
-import LandingApp from "@/components/LandingApp";
+import SplashLoader from "@/components/shared/SplashLoader.astro";
+import Navbar from "@/components/layout/Navbar.astro";
+import HeroSection from "@/components/marketing/HeroSection.astro";
+import HowItWorks from "@/components/marketing/HowItWorks.astro";
+import AppShowcase from "@/components/marketing/AppShowcase.astro";
+import PartnerSection from "@/components/marketing/PartnerSection.astro";
+import BytePowered from "@/components/marketing/BytePowered.astro";
+import FinalCTA from "@/components/marketing/FinalCTA.astro";
+import Footer from "@/components/layout/Footer.astro";
 ---
 
 <Layout>
-  <LandingApp client:only="react" />
+  <main
+    class="min-h-screen bg-black selection:bg-tuga-brand/35 selection:text-white"
+  >
+    <SplashLoader />
+
+    <Navbar />
+
+    <div
+      id="main-shell"
+      class="pointer-events-none opacity-0 transition-opacity duration-1000"
+    >
+      <div id="inicio" class="scroll-target">
+        <HeroSection />
+      </div>
+
+      <HowItWorks />
+      <AppShowcase />
+      <PartnerSection />
+      <BytePowered />
+      <FinalCTA />
+      <Footer />
+    </div>
+  </main>
 </Layout>
+
+<script>
+  import { initLanding } from "@/scripts/landing";
+
+  void initLanding();
+</script>

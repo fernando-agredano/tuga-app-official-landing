@@ -1,0 +1,162 @@
+---
+import { Apple, PlayCircle, Download, Users, Store } from "@lucide/astro";
+
+const stats = [
+  {
+    Icon: Download,
+    value: "1.2M+",
+    label: "Descargas",
+    description: "Instalaciones activas en iOS y Android",
+    chart: [
+      { month: "Ene", total: "120K", value: 38 },
+      { month: "Feb", total: "165K", value: 52 },
+      { month: "Mar", total: "210K", value: 66 },
+      { month: "Abr", total: "258K", value: 78 },
+      { month: "May", total: "310K", value: 92 },
+    ],
+  },
+  {
+    Icon: Users,
+    value: "850K+",
+    label: "Usuarios clientes",
+    description: "Personas ordenando cada mes en TugaApp",
+    chart: [
+      { month: "Ene", total: "72K", value: 30 },
+      { month: "Feb", total: "95K", value: 45 },
+      { month: "Mar", total: "120K", value: 58 },
+      { month: "Abr", total: "143K", value: 70 },
+      { month: "May", total: "168K", value: 82 },
+    ],
+  },
+  {
+    Icon: Store,
+    value: "12K+",
+    label: "Negocios registrados",
+    description: "Restaurantes y comercios aliados en la plataforma",
+    chart: [
+      { month: "Ene", total: "2.1K", value: 24 },
+      { month: "Feb", total: "3.8K", value: 40 },
+      { month: "Mar", total: "6.2K", value: 56 },
+      { month: "Abr", total: "8.9K", value: 72 },
+      { month: "May", total: "12K", value: 88 },
+    ],
+  },
+];
+---
+
+<section id="support" class="scroll-target overflow-hidden bg-black py-24 dot-grid">
+  <div class="container mx-auto px-4">
+    <div
+      class="relative overflow-hidden rounded-[4rem] border border-white/5 bg-zinc-900/40 text-white backdrop-blur-xl"
+    >
+      <div
+        class="absolute top-0 right-0 -mr-40 -mt-40 h-80 w-80 rounded-full bg-tuga-brand opacity-15 blur-[90px] transition-opacity duration-700"
+      >
+      </div>
+      <div
+        class="absolute bottom-0 left-0 -mb-40 -ml-40 h-80 w-80 rounded-full bg-zinc-200 opacity-5 blur-[90px]"
+      >
+      </div>
+
+      <div
+        class="relative z-10 grid grid-cols-1 items-center gap-10 p-10 md:p-12 lg:grid-cols-2 lg:gap-14 lg:p-14"
+      >
+        <div class="max-w-2xl">
+          <h2
+            class="mb-6 text-center text-3xl font-black tracking-tighter leading-[1.05] md:text-5xl xl:text-6xl lg:text-left"
+          >
+            El futuro de <br />
+            <span class="text-tuga-brand">la entrega</span> está aquí.
+          </h2>
+
+          <p
+            class="mx-auto mb-8 max-w-lg text-center text-base font-medium tracking-tight text-zinc-400 md:text-lg xl:text-xl lg:mx-0 lg:text-left"
+          >
+            Únete a miles de usuarios disfrutando de la experiencia premium de
+            TugaApp. Comienza hoy y obtén tu primera entrega gratis.
+          </p>
+
+          <div
+            class="flex flex-col items-center justify-center gap-4 sm:flex-row lg:items-start lg:justify-start"
+          >
+            <button
+              type="button"
+              class="glass-button inline-flex h-14 items-center justify-center rounded-full px-8 text-base font-bold transition-transform hover:scale-[1.02]"
+            >
+              <Apple class="mr-2 h-5 w-5 fill-current" aria-hidden="true" />
+              App Store
+            </button>
+
+            <button
+              type="button"
+              class="inline-flex h-14 items-center justify-center rounded-full border border-zinc-800 px-8 text-base font-bold text-zinc-400 transition-all hover:scale-[1.02] hover:border-tuga-brand/40 hover:bg-tuga-brand/10 hover:text-tuga-brand"
+            >
+              <PlayCircle class="mr-2 h-5 w-5" aria-hidden="true" />
+              Play Store
+            </button>
+          </div>
+        </div>
+
+        <div class="w-full">
+          <div
+            class="mx-auto grid max-w-[500px] grid-cols-1 gap-3.5 md:gap-4 lg:ml-auto"
+          >
+            {
+              stats.map((stat) => {
+                const Icon = stat.Icon;
+                return (
+                  <div class="stat-card relative overflow-visible rounded-[1.6rem] border border-white/8 bg-white/[0.03] p-4 opacity-0 backdrop-blur-md md:p-5">
+                    <div class="relative z-10 flex items-center justify-between gap-4">
+                      <div class="flex min-w-0 items-start gap-4">
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white">
+                          <Icon size={20} stroke-width={1.8} />
+                        </div>
+
+                        <div class="min-w-0">
+                          <div class="mb-0.5 text-2xl font-black tracking-tight text-white md:text-3xl">
+                            {stat.value}
+                          </div>
+                          <div class="mb-1.5 text-xs font-semibold text-zinc-200 md:text-sm">
+                            {stat.label}
+                          </div>
+                          <p class="max-w-[240px] text-xs leading-relaxed text-zinc-500 md:text-sm">
+                            {stat.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="hidden h-20 w-28 shrink-0 items-end justify-end gap-2 self-stretch sm:flex md:w-32">
+                        {stat.chart.map((item) => (
+                          <div class="group/bar relative flex h-20 flex-1 items-end">
+                            <div class="pointer-events-none absolute -top-14 left-1/2 z-20 -translate-x-1/2 translate-y-1 whitespace-nowrap opacity-0 transition-all duration-200 group-hover/bar:translate-y-0 group-hover/bar:opacity-100">
+                              <div class="rounded-xl border border-white/10 bg-zinc-950/95 px-3 py-2 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-md">
+                                <div class="mb-1 text-[10px] tracking-[0.18em] text-zinc-500 uppercase">
+                                  {item.month}
+                                </div>
+                                <div class="text-xs font-semibold text-white">
+                                  {item.total} total
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="relative h-full w-full overflow-hidden rounded-full border border-white/6 bg-white/8">
+                              <div
+                                class="chart-bar-fill absolute bottom-0 left-0 w-full origin-bottom rounded-full bg-tuga-brand/80 transition-all duration-300 group-hover/bar:scale-y-[1.06] group-hover/bar:bg-tuga-brand"
+                                data-height={`${item.value}%`}
+                                style="height: 0%"
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

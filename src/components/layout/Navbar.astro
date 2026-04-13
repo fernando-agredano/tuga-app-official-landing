@@ -1,0 +1,103 @@
+---
+import TugaBrandLogo from "@/components/brand/TugaBrandLogo.astro";
+import { Menu, X } from "@lucide/astro";
+import { NAV_LINKS } from "@/config/landing-sections";
+
+const navTop =
+  "fixed inset-x-0 top-0 z-[100] transition-[padding,background-color,border-color,backdrop-filter,box-shadow] duration-300 py-5 bg-transparent border-b border-transparent shadow-none";
+---
+
+<nav id="site-nav" class:list={[navTop, "invisible"]} aria-label="Principal">
+  <div class="relative z-[110] container mx-auto px-4">
+    <div class="flex min-h-[3rem] items-center justify-between gap-4">
+      <TugaBrandLogo class="shrink-0 py-0.5" />
+
+      <div
+        class="hidden min-w-0 flex-1 items-center justify-end gap-x-5 lg:flex xl:gap-x-7"
+      >
+        {
+          NAV_LINKS.map(({ id, label }) => {
+            const active = id === "inicio";
+            return (
+              <a
+                href={`#${id}`}
+                data-scroll-to={id}
+                data-nav-id={id}
+                class:list={[
+                  "nav-desktop-link text-sm font-bold tracking-tight uppercase transition-colors border-b-2 pb-1 whitespace-nowrap",
+                  active
+                    ? "text-tuga-brand border-tuga-brand"
+                    : "text-zinc-300 border-transparent hover:text-white hover:border-zinc-600",
+                ]}
+              >
+                {label}
+              </a>
+            );
+          })
+        }
+
+        <button
+          type="button"
+          data-scroll-to="support"
+          data-cta-desktop
+          class="rounded-full font-bold h-11 px-6 xl:px-7 text-sm uppercase tracking-wide shrink-0 transition-colors border glass-button border-white/15"
+        >
+          Comenzar
+        </button>
+      </div>
+
+      <button
+        type="button"
+        id="nav-mobile-toggle"
+        class="shrink-0 -mr-1 p-1.5 text-white transition-colors hover:text-tuga-brand lg:hidden"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <span id="nav-icon-menu">
+          <Menu class="h-7 w-7" aria-hidden="true" />
+        </span>
+        <span id="nav-icon-close" class="hidden">
+          <X class="h-7 w-7" aria-hidden="true" />
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="nav-mobile-panel"
+    class="fixed inset-0 z-[105] translate-x-full overflow-y-auto bg-black/95 px-8 pt-[5.25rem] backdrop-blur-sm transition-transform duration-500 lg:hidden"
+    aria-hidden="true"
+  >
+    <div class="mx-auto flex max-w-md flex-col gap-4 pb-16">
+      {
+        NAV_LINKS.map(({ id, label }) => {
+          const active = id === "inicio";
+          return (
+            <a
+              href={`#${id}`}
+              data-scroll-to={id}
+              data-nav-id={id}
+              class:list={[
+                "nav-mobile-link text-left text-2xl font-black tracking-tight transition-colors border-l-4 py-1.5 pl-4",
+                active
+                  ? "border-tuga-brand text-tuga-brand"
+                  : "border-transparent text-white hover:text-tuga-brand",
+              ]}
+            >
+              {label}
+            </a>
+          );
+        })
+      }
+
+      <button
+        type="button"
+        data-scroll-to="support"
+        data-cta-mobile
+        class="mt-3 h-14 rounded-full border border-white/15 bg-white/[0.08] text-base font-bold text-white hover:bg-white/15"
+      >
+        COMENZAR
+      </button>
+    </div>
+  </div>
+</nav>

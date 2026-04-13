@@ -3,12 +3,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: [
-      "**/node_modules/**",
-      "dist/**",
-      ".astro/**",
-      "**/.next/**",
-    ],
+    ignores: ["**/node_modules/**", "dist/**", ".astro/**"],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
