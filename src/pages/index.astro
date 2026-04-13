@@ -1,0 +1,9 @@
+---
+import Layout from "../layouts/Layout.astro";
+import "../styles/globals.css";
+import LandingApp from "@/components/LandingApp";
+---
+
+<Layout>
+  <LandingApp client:only="react" />
+</Layout>
