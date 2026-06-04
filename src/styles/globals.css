@@ -54,13 +54,24 @@
     transition: all 0.3s ease;
   }
 
-  .glass-button:hover {
+  .glass-button:hover,
+  .glass-button:active {
     background-color: rgba(24, 32, 25, 0.78);
     border-color: color-mix(in oklab, #73946a 55%, transparent);
     color: #73946a;
   }
 
-  .glass-button:hover svg {
+  .glass-button:hover svg,
+  .glass-button:active svg {
     color: #73946a;
+  }
+
+  /* Touch-device active feedback for interactive elements */
+  @media (hover: none) {
+    button:active,
+    a[data-scroll-to]:active {
+      opacity: 0.75;
+      transform: scale(0.97);
+    }
   }
 }
