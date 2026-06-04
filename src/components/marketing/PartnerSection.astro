@@ -51,7 +51,8 @@ const pillarIcons = [Store, Bell, ChartLine, Headphones];
         <div class="flex justify-center lg:justify-start">
           <button
             type="button"
-            class="inline-flex h-14 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-7 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-tuga-brand/45 hover:bg-tuga-brand/10 hover:text-tuga-brand"
+            id="partner-register-btn"
+            class="inline-flex h-14 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] px-7 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 lg:hover:border-tuga-brand/45 lg:hover:bg-tuga-brand/10 lg:hover:text-tuga-brand active:border-tuga-brand/45 active:bg-tuga-brand/10 active:text-tuga-brand"
           >
             Registrar mi negocio
           </button>
@@ -68,7 +69,7 @@ const pillarIcons = [Store, Bell, ChartLine, Headphones];
               pillars.map((p, i) => {
                 const Icon = pillarIcons[i];
                 return (
-                  <li class="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 transition-[border-color,background-color,transform] duration-300 hover:border-tuga-brand/35 hover:bg-tuga-brand/[0.06]">
+                  <li class="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 transition-[border-color,background-color,transform] duration-300 lg:hover:border-tuga-brand/35 lg:hover:bg-tuga-brand/[0.06]">
                     <div class="mb-3 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-tuga-brand">
                       <Icon size={22} stroke-width={1.75} />
                     </div>
@@ -84,3 +85,103 @@ const pillarIcons = [Store, Bell, ChartLine, Headphones];
     </div>
   </div>
 </section>
+
+<!-- Partner registration modal -->
+<div id="partner-modal" role="dialog" aria-modal="true" aria-hidden="true"
+  class="fixed inset-0 z-[500] hidden flex items-center justify-center px-5">
+  <div id="partner-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-md opacity-0 transition-opacity duration-200"></div>
+  <div id="partner-card"
+    class="relative z-10 w-full max-w-lg scale-95 opacity-0 overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950 shadow-[0_30px_80px_rgba(0,0,0,0.6),0_0_60px_rgba(115,148,106,0.1)] transition-all duration-300"
+    style="max-height:85vh; overflow-y:auto;">
+    <div class="h-px w-full shrink-0 bg-gradient-to-r from-transparent via-tuga-brand/60 to-transparent"></div>
+    <div class="pointer-events-none absolute -top-16 left-1/2 h-32 w-32 -translate-x-1/2 rounded-full bg-tuga-brand/20 blur-3xl"></div>
+
+    <div class="sticky top-0 z-10 flex items-center justify-between border-b border-white/8 bg-zinc-950/95 px-6 py-4 backdrop-blur-sm">
+      <h3 class="font-black tracking-tight text-white">Registrar mi negocio</h3>
+      <button id="partner-close" type="button" aria-label="Cerrar"
+        class="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 transition-colors hover:bg-zinc-700 active:scale-95">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="px-6 py-6 space-y-6">
+      <p class="text-sm text-zinc-400 leading-relaxed">
+        Únete a más de <span class="text-zinc-200 font-semibold">12,000 negocios</span> que ya operan con TugaApp y lleva tus ventas al siguiente nivel. El proceso es simple y sin costos de entrada.
+      </p>
+
+      <div class="space-y-3">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-500">Cómo funciona</p>
+        <div class="space-y-2">
+          <div class="flex gap-4 rounded-2xl border border-white/8 bg-white/[0.02] p-4">
+            <span class="text-lg font-black text-tuga-brand shrink-0">01</span>
+            <div><h4 class="text-sm font-bold text-white mb-0.5">Solicita tu acceso</h4><p class="text-xs text-zinc-500">Envíanos un correo o completa el formulario de interés. Revisamos tu solicitud en menos de 48 horas.</p></div>
+          </div>
+          <div class="flex gap-4 rounded-2xl border border-white/8 bg-white/[0.02] p-4">
+            <span class="text-lg font-black text-tuga-brand shrink-0">02</span>
+            <div><h4 class="text-sm font-bold text-white mb-0.5">Configura tu perfil</h4><p class="text-xs text-zinc-500">Agrega tus productos, precios, horarios y zona de cobertura desde el panel de negocios.</p></div>
+          </div>
+          <div class="flex gap-4 rounded-2xl border border-white/8 bg-white/[0.02] p-4">
+            <span class="text-lg font-black text-tuga-brand shrink-0">03</span>
+            <div><h4 class="text-sm font-bold text-white mb-0.5">Empieza a recibir pedidos</h4><p class="text-xs text-zinc-500">Acepta y gestiona órdenes en tiempo real. Tus clientes reciben notificaciones en cada etapa.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-500">Qué incluye</p>
+        <div class="grid grid-cols-2 gap-2">
+          {[
+            "Panel de control propio",
+            "Notificaciones automáticas",
+            "Sin costo de suscripción",
+            "Soporte dedicado",
+            "Estadísticas de pedidos",
+            "Visibilidad en la app",
+          ].map(item => (
+            <div class="flex items-center gap-2 text-xs text-zinc-400 rounded-xl border border-white/8 bg-white/[0.02] px-3 py-2">
+              <span class="text-tuga-brand font-bold shrink-0">✓</span>{item}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <a href="mailto:partners@tugaapp.mx"
+        class="flex w-full h-12 items-center justify-center rounded-xl bg-tuga-brand text-sm font-bold text-white transition-all lg:hover:bg-tuga-brand-deep active:scale-[0.97]">
+        Contactar al equipo de Partners
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const pm   = document.getElementById("partner-modal");
+  const pbd  = document.getElementById("partner-backdrop");
+  const pc   = document.getElementById("partner-card");
+  const pbtn = document.getElementById("partner-register-btn");
+  const pclose = document.getElementById("partner-close");
+
+  function openPartnerModal() {
+    pm?.classList.remove("hidden");
+    pm?.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      pbd?.classList.remove("opacity-0");
+      pc?.classList.remove("scale-95", "opacity-0");
+      pc?.classList.add("scale-100");
+    }));
+  }
+  function closePartnerModal() {
+    pc?.classList.add("scale-95", "opacity-0");
+    pc?.classList.remove("scale-100");
+    pbd?.classList.add("opacity-0");
+    setTimeout(() => {
+      pm?.classList.add("hidden");
+      pm?.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }, 300);
+  }
+  pbtn?.addEventListener("click", openPartnerModal);
+  pclose?.addEventListener("click", closePartnerModal);
+  pbd?.addEventListener("click", closePartnerModal);
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closePartnerModal(); });
+</script>

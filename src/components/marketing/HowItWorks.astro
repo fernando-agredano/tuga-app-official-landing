@@ -50,16 +50,16 @@ const icons = [Search, ShoppingBag, Bell, PackageCheck];
         steps.map((step, index) => {
           const Icon = icons[index];
           return (
-          <div class="how-card group relative rounded-2xl border border-zinc-800/50 bg-zinc-900/40 p-5 transition-colors hover:border-zinc-700/50 active:border-zinc-700/50 md:rounded-3xl md:p-8">
+          <div class="how-card group relative rounded-2xl border border-zinc-800/50 bg-zinc-900/40 p-5 transition-colors lg:hover:border-zinc-700/50 active:border-zinc-700/50 md:rounded-3xl md:p-8">
             <div
               class:list={[
-                "absolute inset-0 rounded-2xl bg-gradient-to-b opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-active:opacity-100 md:rounded-3xl",
+                "absolute inset-0 rounded-2xl bg-gradient-to-b opacity-0 transition-opacity duration-300 lg:group-hover:opacity-100 group-active:opacity-100 md:rounded-3xl",
                 step.color,
               ]}
             />
 
             <div class="relative z-10">
-              <div class="mb-4 inline-flex rounded-xl bg-zinc-800 p-3 text-white transition-transform duration-300 group-hover:scale-105 group-active:scale-105 md:mb-6 md:rounded-2xl md:p-4">
+              <div class="mb-4 inline-flex rounded-xl bg-zinc-800 p-3 text-white transition-transform duration-300 lg:group-hover:scale-105 group-active:scale-105 md:mb-6 md:rounded-2xl md:p-4">
                 <Icon size={22} stroke-width={1.5} class="md:h-8 md:w-8" />
               </div>
               <h4 class="mb-2 text-lg font-bold text-white md:mb-4 md:text-2xl">{step.title}</h4>

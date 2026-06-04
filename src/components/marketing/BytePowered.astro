@@ -73,12 +73,12 @@ const cards = [
         {
           cards.map(([Icon, title, subtitle]) => {
             return (
-              <div class="byte-card group rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-tuga-brand/55 hover:bg-tuga-brand/10 hover:shadow-[0_0_32px_rgba(115,148,106,0.18)] active:border-tuga-brand/55 active:bg-tuga-brand/10">
-                <Icon class="mx-auto mb-4 text-white/70 transition-colors duration-300 group-hover:text-tuga-brand group-active:text-tuga-brand" size={32} />
-                <h4 class="mb-1 font-bold text-white transition-colors duration-300 group-hover:text-tuga-brand group-active:text-tuga-brand">
+              <div class="byte-card group rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 lg:hover:border-tuga-brand/55 lg:hover:bg-tuga-brand/10 lg:hover:shadow-[0_0_32px_rgba(115,148,106,0.18)] active:border-tuga-brand/55 active:bg-tuga-brand/10">
+                <Icon class="mx-auto mb-4 text-white/70 transition-colors duration-300 lg:group-hover:text-tuga-brand group-active:text-tuga-brand" size={32} />
+                <h4 class="mb-1 font-bold text-white transition-colors duration-300 lg:group-hover:text-tuga-brand group-active:text-tuga-brand">
                   {title}
                 </h4>
-                <p class="text-xs tracking-tighter text-zinc-500 uppercase transition-colors duration-300 group-hover:text-tuga-brand/80 group-active:text-tuga-brand/80">
+                <p class="text-xs tracking-tighter text-zinc-500 uppercase transition-colors duration-300 lg:group-hover:text-tuga-brand/80 group-active:text-tuga-brand/80">
                   {subtitle}
                 </p>
               </div>

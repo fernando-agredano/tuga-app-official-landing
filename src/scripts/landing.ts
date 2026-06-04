@@ -7,7 +7,7 @@ import { fixed, pseudoRandom } from "@/lib/random";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const NAV_SCROLL_OFFSET = -88;
+const NAV_SCROLL_OFFSET = -64;
 const LENIS_ANCHOR_SCROLL_DURATION_SEC = 1.15;
 const SCROLL_SPY_OFFSET = 108;
 const PROGRAMMATIC_SCROLL_SUPPRESS_MS =
