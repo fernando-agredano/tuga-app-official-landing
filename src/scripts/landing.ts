@@ -75,7 +75,7 @@ function mobileNavClass(active: boolean) {
 }
 
 function ctaDesktopClass(highlighted: boolean) {
-  return `rounded-xl font-bold h-11 px-6 xl:px-7 text-sm uppercase tracking-wide shrink-0 transition-colors border hidden lg:flex ${
+  return `rounded-xl font-bold h-11 px-6 xl:px-7 text-sm uppercase tracking-wide shrink-0 transition-colors border hidden lg:inline-flex lg:items-center ${
     highlighted
       ? "bg-tuga-brand text-white border-tuga-brand-deep/50 shadow-[0_0_24px_rgba(115,148,106,0.35)] hover:bg-tuga-brand-deep"
       : "glass-button border-white/15"
