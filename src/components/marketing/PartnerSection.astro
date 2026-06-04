@@ -69,8 +69,8 @@ const pillarIcons = [Store, Bell, ChartLine, Headphones];
               pillars.map((p, i) => {
                 const Icon = pillarIcons[i];
                 return (
-                  <li class="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 transition-[border-color,background-color,transform] duration-300 lg:hover:border-tuga-brand/35 lg:hover:bg-tuga-brand/[0.06]">
-                    <div class="mb-3 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-tuga-brand">
+                  <li class="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 text-center sm:text-left transition-[border-color,background-color,transform] duration-300 lg:hover:border-tuga-brand/35 lg:hover:bg-tuga-brand/[0.06]">
+                    <div class="mb-3 mx-auto sm:mx-0 flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-tuga-brand">
                       <Icon size={22} stroke-width={1.75} />
                     </div>
                     <h3 class="mb-1.5 text-sm font-bold text-white">{p.title}</h3>
