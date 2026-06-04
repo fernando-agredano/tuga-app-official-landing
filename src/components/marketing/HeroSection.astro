@@ -1,5 +1,5 @@
 ---
-import { Apple, PlayCircle, Rocket } from "@lucide/astro";
+import { Apple, PlayCircle, Rocket, Zap, Store, Star } from "@lucide/astro";
 ---
 
 <section
@@ -72,27 +72,27 @@ import { Apple, PlayCircle, Rocket } from "@lucide/astro";
         class="mt-8 flex flex-col items-center gap-3 opacity-0"
       >
         <div class="flex items-center gap-3">
-          <div class="flex -space-x-2.5">
-            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-tuga-brand to-tuga-brand-deep text-[10px] font-bold text-white">A</div>
-            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-zinc-500 to-zinc-700 text-[10px] font-bold text-white">M</div>
-            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-tuga-brand/70 to-tuga-brand-deep text-[10px] font-bold text-white">R</div>
-            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-zinc-400 to-zinc-600 text-[10px] font-bold text-white">J</div>
-            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-tuga-brand/15 border-tuga-brand/25 text-[10px] font-bold text-tuga-brand">+</div>
+          <div class="flex -space-x-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-tuga-brand to-tuga-brand-deep text-xs font-bold text-white">A</div>
+            <div class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-zinc-500 to-zinc-700 text-xs font-bold text-white">M</div>
+            <div class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-tuga-brand/70 to-tuga-brand-deep text-xs font-bold text-white">R</div>
+            <div class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-zinc-400 to-zinc-600 text-xs font-bold text-white">J</div>
+            <div class="flex h-10 w-10 items-center justify-center rounded-full border-2 border-black bg-tuga-brand/15 border-tuga-brand/25 text-xs font-bold text-tuga-brand">+</div>
           </div>
-          <p class="text-xs text-zinc-500">
+          <p class="text-sm text-zinc-500">
             <span class="font-semibold text-zinc-300">+1,200 personas</span> ya en la lista de espera
           </p>
         </div>
 
         <div class="flex flex-wrap justify-center gap-2">
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-zinc-500">
-            <span class="text-tuga-brand">⚡</span> Entrega en minutos
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3.5 py-1.5 text-xs font-medium text-zinc-400">
+            <Zap class="h-3 w-3 shrink-0" stroke-width={2} aria-hidden="true" /> Entrega en minutos
           </span>
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-zinc-500">
-            <span class="text-tuga-brand">🏪</span> Negocios locales
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3.5 py-1.5 text-xs font-medium text-zinc-400">
+            <Store class="h-3 w-3 shrink-0" stroke-width={2} aria-hidden="true" /> Negocios locales
           </span>
-          <span class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-zinc-500">
-            <span class="text-tuga-brand">⭐</span> 4.8 valoración
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3.5 py-1.5 text-xs font-medium text-zinc-400">
+            <Star class="h-3 w-3 shrink-0" stroke-width={2} aria-hidden="true" /> 4.8 valoración
           </span>
         </div>
       </div>

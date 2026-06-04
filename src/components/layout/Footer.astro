@@ -22,20 +22,9 @@ const socialLinks = [
     svg: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>`,
   },
 ];
-const product = [
-  "Funciones",
-  "Precios",
-  "App Store",
-  "Play Store",
-  "Soporte",
-];
+const product = ["Funciones", "Precios", "App Store", "Play Store", "Soporte"];
 const company = ["Nosotros", "Carreras", "Prensa", "Partners", "Contacto"];
-const legal = [
-  "Privacidad",
-  "Términos",
-  "Política de Cookies",
-  "Aviso Legal",
-];
+const legal  = ["Privacidad", "Términos", "Política de Cookies", "Aviso Legal"];
 ---
 
 <footer class="border-t border-zinc-900 bg-black pt-24 pb-12">
@@ -74,12 +63,13 @@ const legal = [
           {
             product.map((item) => (
               <li>
-                <a
-                  href="#"
-                  class="inline-block text-zinc-500 transition-all duration-300 hover:translate-x-1 hover:text-tuga-brand"
+                <button
+                  type="button"
+                  data-footer-modal={item}
+                  class="footer-modal-trigger text-zinc-500 transition-all duration-300 hover:text-tuga-brand active:text-tuga-brand cursor-pointer"
                 >
                   {item}
-                </a>
+                </button>
               </li>
             ))
           }
@@ -92,12 +82,13 @@ const legal = [
           {
             company.map((item) => (
               <li>
-                <a
-                  href="#"
-                  class="inline-block text-zinc-500 transition-all duration-300 hover:translate-x-1 hover:text-tuga-brand"
+                <button
+                  type="button"
+                  data-footer-modal={item}
+                  class="footer-modal-trigger text-zinc-500 transition-all duration-300 hover:text-tuga-brand active:text-tuga-brand cursor-pointer"
                 >
                   {item}
-                </a>
+                </button>
               </li>
             ))
           }
@@ -110,12 +101,13 @@ const legal = [
           {
             legal.map((item) => (
               <li>
-                <a
-                  href="#"
-                  class="inline-block text-zinc-500 transition-all duration-300 hover:translate-x-1 hover:text-tuga-brand"
+                <button
+                  type="button"
+                  data-footer-modal={item}
+                  class="footer-modal-trigger text-zinc-500 transition-all duration-300 hover:text-tuga-brand active:text-tuga-brand cursor-pointer"
                 >
                   {item}
-                </a>
+                </button>
               </li>
             ))
           }
@@ -139,3 +131,144 @@ const legal = [
     </div>
   </div>
 </footer>
+
+<!-- Footer Info Modal -->
+<div
+  id="footer-info-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  class="fixed inset-0 z-[500] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300"
+>
+  <div id="footer-modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+
+  <div
+    id="footer-modal-card"
+    class="relative z-10 flex w-full max-w-2xl scale-95 flex-col overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950 shadow-[0_30px_80px_rgba(0,0,0,0.7),0_0_60px_rgba(115,148,106,0.1)] transition-transform duration-300"
+    style="max-height: 85vh;"
+  >
+    <!-- Top accent -->
+    <div class="h-px w-full shrink-0 bg-gradient-to-r from-transparent via-tuga-brand/60 to-transparent"></div>
+
+    <!-- Inner glow -->
+    <div class="pointer-events-none absolute -top-20 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-tuga-brand/20 blur-3xl"></div>
+
+    <!-- Header (sticky) -->
+    <div class="relative flex shrink-0 items-center justify-between border-b border-white/8 px-6 py-5">
+      <h3 id="footer-modal-title" class="text-lg font-black tracking-tight text-white"></h3>
+      <button
+        id="footer-modal-close"
+        type="button"
+        aria-label="Cerrar"
+        class="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 transition-colors hover:bg-zinc-700 hover:text-white active:scale-95"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <!-- Scrollable body -->
+    <div id="footer-modal-body" class="overflow-y-auto px-6 py-6"></div>
+  </div>
+</div>
+
+<script>
+  const CONTENT: Record<string, { title: string; html: string }> = {
+    "Funciones": {
+      title: "Funciones de TugaApp",
+      html: `<div class="space-y-5"><p class="text-zinc-400 leading-relaxed">TugaApp fue diseñada para simplificar la experiencia de pedir en tu región. Cada función está pensada para hacer el proceso más rápido, claro y confiable.</p><div class="space-y-3"><div class="flex gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-xl shrink-0 mt-0.5">🔍</span><div><h4 class="font-bold text-white mb-1 text-sm">Exploración de negocios</h4><p class="text-sm text-zinc-400">Navega entre restaurantes y comercios locales. Filtra por categoría o tiempo de entrega.</p></div></div><div class="flex gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-xl shrink-0 mt-0.5">⚡</span><div><h4 class="font-bold text-white mb-1 text-sm">Pedidos rápidos</h4><p class="text-sm text-zinc-400">Selecciona tus productos y confirma en segundos. Sin pasos innecesarios.</p></div></div><div class="flex gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-xl shrink-0 mt-0.5">📍</span><div><h4 class="font-bold text-white mb-1 text-sm">Ubicación inteligente</h4><p class="text-sm text-zinc-400">Establece tu dirección directamente desde la app. Sin explicaciones complicadas.</p></div></div><div class="flex gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-xl shrink-0 mt-0.5">🔔</span><div><h4 class="font-bold text-white mb-1 text-sm">Notificaciones en tiempo real</h4><p class="text-sm text-zinc-400">Recibe actualizaciones en cada etapa: aceptado, en preparación, en camino y entregado.</p></div></div><div class="flex gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-xl shrink-0 mt-0.5">💳</span><div><h4 class="font-bold text-white mb-1 text-sm">Pago en efectivo</h4><p class="text-sm text-zinc-400">Paga al recibir tu pedido. Simplicidad y confianza en cada transacción.</p></div></div></div></div>`
+    },
+    "Precios": {
+      title: "Precios",
+      html: `<div class="space-y-5"><div class="rounded-2xl border border-tuga-brand/30 bg-tuga-brand/5 p-6 text-center"><p class="text-5xl font-black text-tuga-brand mb-2">Gratis</p><p class="text-zinc-400">TugaApp es completamente gratuita para usuarios.</p></div><div class="space-y-3"><div class="flex items-start gap-3 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-tuga-brand mt-0.5 font-bold shrink-0">✓</span><div><h4 class="font-semibold text-white text-sm">Sin suscripción</h4><p class="text-sm text-zinc-500">Descarga y usa la app sin pagar mensualidades ni cuotas de registro.</p></div></div><div class="flex items-start gap-3 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-tuga-brand mt-0.5 font-bold shrink-0">✓</span><div><h4 class="font-semibold text-white text-sm">Sin cargos ocultos</h4><p class="text-sm text-zinc-500">Pagas exactamente lo que se muestra. Sin comisiones adicionales al usuario.</p></div></div><div class="flex items-start gap-3 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-tuga-brand mt-0.5 font-bold shrink-0">✓</span><div><h4 class="font-semibold text-white text-sm">Costo de delivery transparente</h4><p class="text-sm text-zinc-500">El costo de entrega (si aplica) lo define cada negocio y se muestra antes de confirmar.</p></div></div></div><p class="text-xs text-zinc-600 text-center">Para negocios, consulta nuestro programa de Partners.</p></div>`
+    },
+    "App Store": {
+      title: "App Store — iOS",
+      html: `<div class="text-center space-y-6 py-4"><div class="flex justify-center"><div class="flex h-20 w-20 items-center justify-center rounded-3xl border border-tuga-brand/30 bg-tuga-brand/10 text-4xl">🍎</div></div><div><p class="text-sm font-semibold uppercase tracking-[0.25em] text-tuga-brand mb-2">Próximamente</p><h4 class="text-2xl font-black text-white mb-3">TugaApp en iOS</h4><p class="text-zinc-400 leading-relaxed max-w-sm mx-auto">Estamos trabajando para lanzar TugaApp en la App Store de Apple. Muy pronto podrás descargarla en tu iPhone o iPad.</p></div><div class="rounded-2xl border border-white/8 bg-white/[0.02] p-4"><p class="text-sm text-zinc-500">Compatible con <span class="text-zinc-300 font-medium">iOS 15+</span> · iPhone y iPad</p></div></div>`
+    },
+    "Play Store": {
+      title: "Play Store — Android",
+      html: `<div class="text-center space-y-6 py-4"><div class="flex justify-center"><div class="flex h-20 w-20 items-center justify-center rounded-3xl border border-tuga-brand/30 bg-tuga-brand/10 text-4xl">🤖</div></div><div><p class="text-sm font-semibold uppercase tracking-[0.25em] text-tuga-brand mb-2">Próximamente</p><h4 class="text-2xl font-black text-white mb-3">TugaApp en Android</h4><p class="text-zinc-400 leading-relaxed max-w-sm mx-auto">TugaApp llegará pronto a Google Play. Descárgala en tu smartphone Android y empieza a pedir en minutos.</p></div><div class="rounded-2xl border border-white/8 bg-white/[0.02] p-4"><p class="text-sm text-zinc-500">Compatible con <span class="text-zinc-300 font-medium">Android 9+</span></p></div></div>`
+    },
+    "Soporte": {
+      title: "Soporte",
+      html: `<div class="space-y-4"><p class="text-zinc-400 leading-relaxed">Estamos aquí para ayudarte. Si tienes alguna pregunta o problema, contáctanos.</p><div class="space-y-3"><div class="flex items-center gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-2xl">✉️</span><div><p class="font-semibold text-white text-sm">Correo electrónico</p><p class="text-tuga-brand text-sm">soporte@tugaapp.mx</p></div></div><div class="flex items-center gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-2xl">⏱️</span><div><p class="font-semibold text-white text-sm">Tiempo de respuesta</p><p class="text-zinc-500 text-sm">Menos de 24 horas en días hábiles</p></div></div><div class="flex items-center gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-2xl">🕐</span><div><p class="font-semibold text-white text-sm">Horario de atención</p><p class="text-zinc-500 text-sm">Lunes a Sábado · 9:00 – 20:00</p></div></div></div></div>`
+    },
+    "Nosotros": {
+      title: "Nosotros",
+      html: `<div class="space-y-5"><div class="rounded-2xl border border-tuga-brand/20 bg-tuga-brand/5 p-5"><p class="text-zinc-300 leading-relaxed italic">"Creemos que pedir en tu región debería ser tan fácil como un mensaje, pero mucho más confiable."</p></div><p class="text-zinc-400 leading-relaxed">TugaApp nació de una necesidad real: conectar a las personas con los negocios de su comunidad de forma sencilla, rápida y sin complicaciones tecnológicas innecesarias.</p><div class="space-y-3"><div class="flex gap-3 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-tuga-brand font-bold shrink-0 mt-0.5">◆</span><div><h4 class="font-semibold text-white mb-1 text-sm">Nuestra misión</h4><p class="text-sm text-zinc-400">Democratizar el delivery en regiones donde las grandes plataformas no llegan, dando visibilidad a los negocios locales.</p></div></div><div class="flex gap-3 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-tuga-brand font-bold shrink-0 mt-0.5">◆</span><div><h4 class="font-semibold text-white mb-1 text-sm">Nuestra visión</h4><p class="text-sm text-zinc-400">Ser la plataforma de delivery de referencia en México para comunidades medianas y pequeñas, impulsando la economía local.</p></div></div><div class="flex gap-3 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-tuga-brand font-bold shrink-0 mt-0.5">◆</span><div><h4 class="font-semibold text-white mb-1 text-sm">Impulsado por Byte</h4><p class="text-sm text-zinc-400">Desarrollado sobre la infraestructura de Byte: alta disponibilidad, seguridad y escalabilidad desde el primer día.</p></div></div></div></div>`
+    },
+    "Carreras": {
+      title: "Carreras",
+      html: `<div class="space-y-5"><div class="text-center py-2"><p class="text-sm font-semibold uppercase tracking-[0.25em] text-tuga-brand mb-2">Únete al equipo</p><p class="text-zinc-400 text-sm leading-relaxed max-w-md mx-auto">Estamos creciendo y buscamos personas apasionadas por la tecnología y el impacto local. Sé parte de algo grande desde el inicio.</p></div><div class="space-y-3"><div class="p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><p class="text-xs text-tuga-brand font-semibold uppercase tracking-wider mb-1">Tecnología</p><h4 class="font-bold text-white text-sm">Desarrollador Mobile</h4><p class="text-xs text-zinc-500 mt-1">React Native · Remoto</p></div><div class="p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><p class="text-xs text-tuga-brand font-semibold uppercase tracking-wider mb-1">Diseño</p><h4 class="font-bold text-white text-sm">UI/UX Designer</h4><p class="text-xs text-zinc-500 mt-1">Figma · Remoto / Híbrido</p></div><div class="p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><p class="text-xs text-tuga-brand font-semibold uppercase tracking-wider mb-1">Operaciones</p><h4 class="font-bold text-white text-sm">Growth & Partnerships</h4><p class="text-xs text-zinc-500 mt-1">Full time · Presencial</p></div></div><p class="text-center text-sm text-zinc-500">Envía tu CV a <span class="text-tuga-brand">careers@tugaapp.mx</span></p></div>`
+    },
+    "Prensa": {
+      title: "Prensa",
+      html: `<div class="space-y-4"><p class="text-zinc-400 leading-relaxed">¿Eres periodista o medio de comunicación? Tenemos material listo para ti. Contáctanos y te enviamos el kit completo.</p><div class="space-y-3"><div class="flex items-center gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-2xl">📦</span><div><h4 class="font-semibold text-white text-sm">Kit de prensa</h4><p class="text-xs text-zinc-500">Logos, imágenes y capturas en alta resolución, más descripción completa de la plataforma.</p></div></div><div class="flex items-center gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-2xl">💬</span><div><h4 class="font-semibold text-white text-sm">Entrevistas</h4><p class="text-xs text-zinc-500">Disponibles para hablar sobre la visión de la empresa y el impacto en el comercio local.</p></div></div><div class="flex items-center gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-2xl">📧</span><div><h4 class="font-semibold text-white text-sm">Contacto de medios</h4><p class="text-tuga-brand text-sm">prensa@tugaapp.mx</p></div></div></div></div>`
+    },
+    "Partners": {
+      title: "Partners",
+      html: `<div class="space-y-5"><p class="text-zinc-400 leading-relaxed">¿Tienes un negocio y quieres llegar a más clientes? Únete a TugaApp y lleva tus ventas al siguiente nivel.</p><div class="space-y-3"><div class="flex gap-3 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-tuga-brand font-black text-lg shrink-0">01</span><div><h4 class="font-semibold text-white text-sm">Regístrate</h4><p class="text-xs text-zinc-500">Completa el formulario con la información de tu negocio.</p></div></div><div class="flex gap-3 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-tuga-brand font-black text-lg shrink-0">02</span><div><h4 class="font-semibold text-white text-sm">Configura tu menú</h4><p class="text-xs text-zinc-500">Agrega tus productos, precios y horarios desde el panel de control.</p></div></div><div class="flex gap-3 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-tuga-brand font-black text-lg shrink-0">03</span><div><h4 class="font-semibold text-white text-sm">Recibe pedidos</h4><p class="text-xs text-zinc-500">Acepta y gestiona pedidos en tiempo real desde la app de negocios.</p></div></div></div><p class="text-center text-sm text-zinc-500">Más información: <span class="text-tuga-brand">partners@tugaapp.mx</span></p></div>`
+    },
+    "Contacto": {
+      title: "Contacto",
+      html: `<div class="space-y-4"><p class="text-zinc-400 leading-relaxed">¿Tienes preguntas, sugerencias o quieres colaborar? Nos encantaría escucharte.</p><div class="space-y-3"><div class="flex items-center gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-2xl">✉️</span><div><p class="text-xs text-zinc-500">General</p><p class="text-tuga-brand font-semibold text-sm">hola@tugaapp.mx</p></div></div><div class="flex items-center gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-2xl">🛟</span><div><p class="text-xs text-zinc-500">Soporte</p><p class="text-tuga-brand font-semibold text-sm">soporte@tugaapp.mx</p></div></div><div class="flex items-center gap-4 p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><span class="text-2xl">🤝</span><div><p class="text-xs text-zinc-500">Partners & Negocios</p><p class="text-tuga-brand font-semibold text-sm">partners@tugaapp.mx</p></div></div></div></div>`
+    },
+    "Privacidad": {
+      title: "Política de Privacidad",
+      html: `<div class="space-y-6 text-sm"><p class="text-zinc-500 text-xs">Última actualización: 1 de junio de 2026</p><p class="text-zinc-400 leading-relaxed">En TugaApp nos comprometemos a proteger tu privacidad. Esta política describe cómo recopilamos, usamos y protegemos tu información personal.</p><div class="space-y-5"><div><h4 class="font-bold text-white mb-2">1. Información que recopilamos</h4><ul class="space-y-1.5 text-zinc-400"><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Datos de registro: nombre, correo electrónico, teléfono.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Datos de entrega: dirección y coordenadas de ubicación.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Historial de pedidos y preferencias de productos.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Datos técnicos: tipo de dispositivo, sistema operativo, versión de la app.</li></ul></div><div><h4 class="font-bold text-white mb-2">2. Uso de tu información</h4><ul class="space-y-1.5 text-zinc-400"><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Procesar y entregar tus pedidos correctamente.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Enviarte notificaciones sobre el estado de tu orden.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Mejorar la experiencia de la plataforma mediante análisis de uso.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Prevenir fraudes y garantizar la seguridad de la plataforma.</li></ul></div><div><h4 class="font-bold text-white mb-2">3. Compartición de datos</h4><p class="text-zinc-400 leading-relaxed">No vendemos tu información. Compartimos datos únicamente con los negocios para completar tu pedido y con proveedores técnicos bajo estrictos acuerdos de confidencialidad.</p></div><div><h4 class="font-bold text-white mb-2">4. Seguridad</h4><p class="text-zinc-400 leading-relaxed">Implementamos cifrado en tránsito (TLS/SSL), cifrado en reposo, acceso restringido por roles y auditorías periódicas de seguridad.</p></div><div><h4 class="font-bold text-white mb-2">5. Tus derechos</h4><ul class="space-y-1.5 text-zinc-400"><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Acceder, corregir o eliminar tu información personal.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Oponerte al tratamiento de tus datos para marketing.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Solicitar la portabilidad de tus datos.</li></ul><p class="text-zinc-400 mt-2">Escríbenos a <span class="text-tuga-brand">privacidad@tugaapp.mx</span></p></div><div><h4 class="font-bold text-white mb-2">6. Retención de datos</h4><p class="text-zinc-400 leading-relaxed">Conservamos tu información mientras tu cuenta esté activa. Al eliminarla, borramos tus datos en un plazo de 30 días, salvo obligación legal.</p></div><div><h4 class="font-bold text-white mb-2">7. Cambios a esta política</h4><p class="text-zinc-400 leading-relaxed">Notificaremos cambios significativos con al menos 30 días de anticipación vía app o correo electrónico.</p></div></div></div>`
+    },
+    "Términos": {
+      title: "Términos de Servicio",
+      html: `<div class="space-y-6 text-sm"><p class="text-zinc-500 text-xs">Última actualización: 1 de junio de 2026</p><p class="text-zinc-400 leading-relaxed">Al descargar, registrarte o usar TugaApp, aceptas estos Términos de Servicio.</p><div class="space-y-5"><div><h4 class="font-bold text-white mb-2">1. Descripción del servicio</h4><p class="text-zinc-400 leading-relaxed">TugaApp actúa como intermediario entre usuarios y negocios locales, facilitando la realización y entrega de pedidos. No somos un restaurante ni proveedor de alimentos; los productos son responsabilidad de cada negocio.</p></div><div><h4 class="font-bold text-white mb-2">2. Registro y cuenta</h4><ul class="space-y-1.5 text-zinc-400"><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Debes ser mayor de 18 años para registrarte.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Eres responsable de la confidencialidad de tu contraseña.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Debes proporcionar información veraz y actualizada.</li></ul></div><div><h4 class="font-bold text-white mb-2">3. Pedidos y pagos</h4><ul class="space-y-1.5 text-zinc-400"><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Los pedidos son vinculantes una vez confirmados por el negocio.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Los precios incluyen impuestos aplicables.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>El costo de delivery se muestra antes de confirmar el pedido.</li></ul></div><div><h4 class="font-bold text-white mb-2">4. Cancelaciones y reembolsos</h4><p class="text-zinc-400 leading-relaxed">Puedes cancelar antes de que el negocio acepte tu pedido. Una vez aceptado, la cancelación queda a criterio del negocio. Los reembolsos por problemas se gestionan contactando a soporte.</p></div><div><h4 class="font-bold text-white mb-2">5. Uso aceptable</h4><p class="text-zinc-400 mb-2">Está prohibido:</p><ul class="space-y-1.5 text-zinc-400"><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Usar la plataforma para fines ilegales o fraudulentos.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Proporcionar información falsa en pedidos o registros.</li><li class="flex gap-2"><span class="text-tuga-brand shrink-0">·</span>Intentar acceder a sistemas o datos no autorizados.</li></ul></div><div><h4 class="font-bold text-white mb-2">6. Limitación de responsabilidad</h4><p class="text-zinc-400 leading-relaxed">TugaApp no garantiza la disponibilidad ininterrumpida del servicio. No somos responsables por la calidad de los productos de los negocios ni por retrasos por factores externos.</p></div><div><h4 class="font-bold text-white mb-2">7. Ley aplicable</h4><p class="text-zinc-400 leading-relaxed">Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Para cualquier controversia, las partes se someten a los tribunales competentes.</p></div></div></div>`
+    },
+    "Política de Cookies": {
+      title: "Política de Cookies",
+      html: `<div class="space-y-6 text-sm"><p class="text-zinc-500 text-xs">Última actualización: 1 de junio de 2026</p><p class="text-zinc-400 leading-relaxed">Esta política explica cómo TugaApp utiliza cookies y tecnologías similares para mejorar tu experiencia.</p><div class="space-y-5"><div><h4 class="font-bold text-white mb-2">¿Qué son las cookies?</h4><p class="text-zinc-400 leading-relaxed">Las cookies son pequeños archivos de texto almacenados en tu dispositivo que nos permiten reconocerte en visitas posteriores y personalizar tu experiencia.</p></div><div><h4 class="font-bold text-white mb-3">Tipos de cookies que usamos</h4><div class="space-y-3"><div class="p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><div class="flex items-center gap-2 mb-1.5"><span class="w-2 h-2 rounded-full bg-tuga-brand shrink-0"></span><h5 class="font-semibold text-white text-sm">Cookies esenciales</h5><span class="ml-auto text-xs text-tuga-brand bg-tuga-brand/10 px-2 py-0.5 rounded-full">Requeridas</span></div><p class="text-zinc-500 text-xs leading-relaxed">Necesarias para autenticación de sesión y seguridad. No pueden desactivarse.</p></div><div class="p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><div class="flex items-center gap-2 mb-1.5"><span class="w-2 h-2 rounded-full bg-zinc-500 shrink-0"></span><h5 class="font-semibold text-white text-sm">Cookies de rendimiento</h5><span class="ml-auto text-xs text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded-full">Opcionales</span></div><p class="text-zinc-500 text-xs leading-relaxed">Nos ayudan a entender cómo interactúas con la app. La información es anónima y agregada.</p></div><div class="p-4 rounded-2xl border border-white/8 bg-white/[0.02]"><div class="flex items-center gap-2 mb-1.5"><span class="w-2 h-2 rounded-full bg-zinc-500 shrink-0"></span><h5 class="font-semibold text-white text-sm">Cookies funcionales</h5><span class="ml-auto text-xs text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded-full">Opcionales</span></div><p class="text-zinc-500 text-xs leading-relaxed">Recuerdan tus preferencias: dirección guardada, negocios favoritos y configuración de notificaciones.</p></div></div></div><div><h4 class="font-bold text-white mb-2">Gestión de cookies</h4><p class="text-zinc-400 leading-relaxed">Puedes controlar las cookies desde la configuración de tu dispositivo. Desactivar ciertas cookies puede afectar la funcionalidad de TugaApp.</p></div><div><h4 class="font-bold text-white mb-1">Contacto</h4><p class="text-zinc-400">Para preguntas: <span class="text-tuga-brand">privacidad@tugaapp.mx</span></p></div></div></div>`
+    },
+    "Aviso Legal": {
+      title: "Aviso Legal",
+      html: `<div class="space-y-6 text-sm"><p class="text-zinc-500 text-xs">Última actualización: 1 de junio de 2026</p><div class="space-y-5"><div><h4 class="font-bold text-white mb-2">Titular y responsable</h4><div class="p-4 rounded-2xl border border-white/8 bg-white/[0.02] space-y-1.5"><p class="text-zinc-400"><span class="text-zinc-300 font-medium">Razón social:</span> Byte Technologies S.A. de C.V.</p><p class="text-zinc-400"><span class="text-zinc-300 font-medium">Actividad:</span> Plataforma de intermediación digital para delivery</p><p class="text-zinc-400"><span class="text-zinc-300 font-medium">País:</span> México</p><p class="text-zinc-400"><span class="text-zinc-300 font-medium">Contacto legal:</span> <span class="text-tuga-brand">legal@tugaapp.mx</span></p></div></div><div><h4 class="font-bold text-white mb-2">Objeto del sitio</h4><p class="text-zinc-400 leading-relaxed">Este sitio presenta TugaApp, plataforma de delivery que conecta a usuarios con negocios locales en México. La información publicada tiene carácter informativo y promocional.</p></div><div><h4 class="font-bold text-white mb-2">Propiedad intelectual</h4><p class="text-zinc-400 leading-relaxed">El nombre "TugaApp", el logotipo, diseño, textos e imágenes son propiedad de Byte Technologies S.A. de C.V., protegidos por las leyes de propiedad intelectual en México. Queda prohibida su reproducción sin autorización expresa y por escrito.</p></div><div><h4 class="font-bold text-white mb-2">Exclusión de responsabilidad</h4><p class="text-zinc-400 leading-relaxed">Byte Technologies no se hace responsable de los daños derivados del uso del sitio, de interrupciones del servicio por causas técnicas ajenas, ni de la veracidad de información proporcionada por terceros.</p></div><div><h4 class="font-bold text-white mb-2">Legislación aplicable y jurisdicción</h4><p class="text-zinc-400 leading-relaxed">Este aviso se rige por la legislación vigente en los Estados Unidos Mexicanos. Para la resolución de cualquier controversia, las partes se someten a los tribunales competentes de la Ciudad de México, renunciando a cualquier otro fuero.</p></div></div></div>`
+    },
+  };
+
+  const modal    = document.getElementById("footer-info-modal");
+  const card     = document.getElementById("footer-modal-card");
+  const backdrop = document.getElementById("footer-modal-backdrop");
+  const closeBtn = document.getElementById("footer-modal-close");
+  const titleEl  = document.getElementById("footer-modal-title");
+  const bodyEl   = document.getElementById("footer-modal-body");
+
+  function openFooterModal(key: string) {
+    const entry = CONTENT[key];
+    if (!entry || !titleEl || !bodyEl) return;
+    titleEl.textContent = entry.title;
+    bodyEl.innerHTML = entry.html;
+    bodyEl.scrollTop = 0;
+    modal?.classList.remove("opacity-0", "pointer-events-none");
+    modal?.setAttribute("aria-hidden", "false");
+    card?.classList.remove("scale-95");
+    card?.classList.add("scale-100");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeFooterModal() {
+    modal?.classList.add("opacity-0", "pointer-events-none");
+    modal?.setAttribute("aria-hidden", "true");
+    card?.classList.remove("scale-100");
+    card?.classList.add("scale-95");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll<HTMLElement>(".footer-modal-trigger").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.footerModal ?? "";
+      openFooterModal(key);
+    });
+  });
+
+  closeBtn?.addEventListener("click", closeFooterModal);
+  backdrop?.addEventListener("click", closeFooterModal);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeFooterModal();
+  });
+</script>
