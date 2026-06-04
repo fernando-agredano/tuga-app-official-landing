@@ -245,6 +245,7 @@ function initHeroAnimations() {
   const title = root.querySelector("[data-hero-title]");
   const sub = root.querySelector("[data-hero-sub]");
   const cta = root.querySelector("[data-hero-cta]");
+  const stats = root.querySelector("[data-hero-stats]");
 
   const tl = gsap.timeline();
   tl.fromTo(
@@ -269,6 +270,12 @@ function initHeroAnimations() {
       { opacity: 0, y: 16 },
       { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
       "-=0.35",
+    )
+    .fromTo(
+      stats,
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+      "-=0.25",
     );
 }
 

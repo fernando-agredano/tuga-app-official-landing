@@ -1,5 +1,5 @@
 ---
-import { Apple, PlayCircle } from "@lucide/astro";
+import { Apple, PlayCircle, Rocket } from "@lucide/astro";
 ---
 
 <section
@@ -8,13 +8,13 @@ import { Apple, PlayCircle } from "@lucide/astro";
 >
   <div
     class="pointer-events-none absolute top-1/2 left-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/4 blur-[80px]"
-  >
-  </div>
+  ></div>
 
   <div
     class="container relative z-10 mx-auto flex h-full md:min-h-screen items-center justify-center px-6 md:px-4 md:-mt-12"
   >
     <div class="mx-auto w-full max-w-2xl text-center">
+
       <div
         data-hero-badge
         class="mb-5 inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-300 opacity-0"
@@ -45,11 +45,12 @@ import { Apple, PlayCircle } from "@lucide/astro";
 
       <div
         data-hero-cta
-        class="flex flex-col flex-wrap items-center justify-center gap-4 opacity-0 sm:flex-row"
+        class="flex flex-col items-center justify-center gap-3 opacity-0 sm:flex-row"
       >
         <button
           type="button"
-          class="glass-button inline-flex h-11 items-center justify-center rounded-full px-6 text-sm font-bold transition-transform hover:scale-[1.02] active:scale-[0.97] md:h-14 md:px-8 md:text-lg"
+          data-open-modal
+          class="glass-button inline-flex h-11 w-full items-center justify-center rounded-full px-6 text-sm font-bold transition-transform hover:scale-[1.02] active:scale-[0.97] sm:w-auto md:h-14 md:px-8 md:text-base"
         >
           <Apple class="mr-2 h-4 w-4 fill-current md:h-5 md:w-5" aria-hidden="true" />
           Descargar para iOS
@@ -57,12 +58,130 @@ import { Apple, PlayCircle } from "@lucide/astro";
 
         <button
           type="button"
-          class="inline-flex h-11 items-center justify-center rounded-full border border-zinc-800 px-6 text-sm font-bold text-zinc-400 transition-all hover:scale-[1.02] hover:border-tuga-brand/40 hover:bg-tuga-brand/10 hover:text-tuga-brand active:scale-[0.97] active:border-tuga-brand/40 active:bg-tuga-brand/10 active:text-tuga-brand md:h-14 md:px-8 md:text-lg"
+          data-open-modal
+          class="glass-button inline-flex h-11 w-full items-center justify-center rounded-full px-6 text-sm font-bold transition-transform hover:scale-[1.02] active:scale-[0.97] sm:w-auto md:h-14 md:px-8 md:text-base"
         >
           <PlayCircle class="mr-2 h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
           Descargar para Android
         </button>
       </div>
+
+      <!-- Social proof -->
+      <div
+        data-hero-stats
+        class="mt-8 flex flex-col items-center gap-3 opacity-0"
+      >
+        <div class="flex items-center gap-3">
+          <div class="flex -space-x-2.5">
+            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-tuga-brand to-tuga-brand-deep text-[10px] font-bold text-white">A</div>
+            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-zinc-500 to-zinc-700 text-[10px] font-bold text-white">M</div>
+            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-tuga-brand/70 to-tuga-brand-deep text-[10px] font-bold text-white">R</div>
+            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-gradient-to-br from-zinc-400 to-zinc-600 text-[10px] font-bold text-white">J</div>
+            <div class="flex h-8 w-8 items-center justify-center rounded-full border-2 border-black bg-tuga-brand/15 border-tuga-brand/25 text-[10px] font-bold text-tuga-brand">+</div>
+          </div>
+          <p class="text-xs text-zinc-500">
+            <span class="font-semibold text-zinc-300">+1,200 personas</span> ya en la lista de espera
+          </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-2">
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-zinc-500">
+            <span class="text-tuga-brand">⚡</span> Entrega en minutos
+          </span>
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-zinc-500">
+            <span class="text-tuga-brand">🏪</span> Negocios locales
+          </span>
+          <span class="inline-flex items-center gap-1.5 rounded-full border border-white/8 bg-white/[0.03] px-3 py-1 text-[11px] font-medium text-zinc-500">
+            <span class="text-tuga-brand">⭐</span> 4.8 valoración
+          </span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
+<!-- Coming Soon Modal -->
+<div
+  id="coming-soon-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  class="fixed inset-0 z-[500] flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300"
+>
+  <div id="modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-md"></div>
+
+  <div
+    id="modal-card"
+    class="relative z-10 w-full max-w-[340px] scale-95 overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950 shadow-[0_30px_80px_rgba(0,0,0,0.6),0_0_60px_rgba(115,148,106,0.12)] transition-transform duration-300"
+  >
+    <!-- Top accent line -->
+    <div class="h-px w-full bg-gradient-to-r from-transparent via-tuga-brand/70 to-transparent"></div>
+
+    <!-- Inner glow -->
+    <div class="pointer-events-none absolute -top-16 left-1/2 h-32 w-32 -translate-x-1/2 rounded-full bg-tuga-brand/25 blur-3xl"></div>
+
+    <div class="px-8 pb-8 pt-7 text-center">
+      <!-- Icon -->
+      <div class="mb-5 flex justify-center">
+        <div class="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-tuga-brand/30 bg-tuga-brand/10">
+          <Rocket class="h-7 w-7 text-tuga-brand" stroke-width={1.75} aria-hidden="true" />
+        </div>
+      </div>
+
+      <span class="mb-2 block text-[11px] font-semibold uppercase tracking-[0.3em] text-tuga-brand">
+        Próximamente
+      </span>
+
+      <h3 class="mb-3 text-2xl font-black tracking-tight text-white">
+        ¡Muy pronto!
+      </h3>
+
+      <p class="mb-7 text-sm leading-relaxed text-zinc-400">
+        Estamos preparando TugaApp para llevarla a tu dispositivo.
+        Sé el primero en enterarte cuando esté lista.
+      </p>
+
+      <button
+        id="modal-close-btn"
+        type="button"
+        class="w-full h-11 rounded-full bg-tuga-brand text-sm font-bold text-white transition-all hover:bg-tuga-brand-deep active:scale-[0.97]"
+      >
+        ¡Genial, esperaré!
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById("coming-soon-modal");
+  const card  = document.getElementById("modal-card");
+  const backdrop = document.getElementById("modal-backdrop");
+  const closeBtn  = document.getElementById("modal-close-btn");
+
+  function openModal() {
+    modal?.classList.remove("opacity-0", "pointer-events-none");
+    modal?.setAttribute("aria-hidden", "false");
+    card?.classList.remove("scale-95");
+    card?.classList.add("scale-100");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal?.classList.add("opacity-0", "pointer-events-none");
+    modal?.setAttribute("aria-hidden", "true");
+    card?.classList.remove("scale-100");
+    card?.classList.add("scale-95");
+    document.body.style.overflow = "";
+  }
+
+  document.querySelectorAll("[data-open-modal]").forEach((btn) => {
+    btn.addEventListener("click", openModal);
+  });
+
+  closeBtn?.addEventListener("click", closeModal);
+  backdrop?.addEventListener("click", closeModal);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+</script>
