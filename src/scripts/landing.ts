@@ -14,7 +14,7 @@ const PROGRAMMATIC_SCROLL_SUPPRESS_MS =
   LENIS_ANCHOR_SCROLL_DURATION_SEC * 1000 + 120;
 
 const NAV_BASE =
-  "fixed inset-x-0 top-0 z-[100] transition-[padding,background-color,border-color,backdrop-filter,box-shadow] duration-300";
+  "fixed inset-x-0 top-0 z-[200] transition-[padding,background-color,border-color,backdrop-filter,box-shadow] duration-300";
 const NAV_SCROLLED =
   `${NAV_BASE} py-3.5 bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.45)]`;
 const NAV_TOP =
@@ -67,10 +67,10 @@ function desktopNavClass(active: boolean) {
 }
 
 function mobileNavClass(active: boolean) {
-  return `nav-mobile-link text-left text-2xl font-black tracking-tight transition-colors border-l-4 pl-4 py-1.5 ${
+  return `nav-mobile-link text-left text-[11px] font-semibold uppercase tracking-widest transition-colors border-l-2 pl-4 py-2.5 ${
     active
       ? "text-tuga-brand border-tuga-brand"
-      : "text-white border-transparent hover:text-tuga-brand"
+      : "text-zinc-300 border-transparent hover:text-white hover:border-zinc-600"
   }`;
 }
 
@@ -123,6 +123,42 @@ function updateNavBar() {
   setNavActive(computeSpySectionId());
 }
 
+function openMobileMenu() {
+  const panel = document.getElementById("nav-mobile-panel");
+  const overlay = document.getElementById("nav-mobile-overlay");
+  const iconMenu = document.getElementById("nav-icon-menu");
+  const iconClose = document.getElementById("nav-icon-close");
+  const toggle = document.getElementById("nav-mobile-toggle");
+
+  panel?.classList.remove("translate-x-full");
+  panel?.setAttribute("aria-hidden", "false");
+  toggle?.setAttribute("aria-expanded", "true");
+  iconMenu?.classList.add("hidden");
+  iconClose?.classList.remove("hidden");
+
+  overlay?.classList.remove("opacity-0", "pointer-events-none");
+  overlay?.classList.add("opacity-100");
+  document.body.style.overflow = "hidden";
+}
+
+function closeMobileMenu() {
+  const panel = document.getElementById("nav-mobile-panel");
+  const overlay = document.getElementById("nav-mobile-overlay");
+  const iconMenu = document.getElementById("nav-icon-menu");
+  const iconClose = document.getElementById("nav-icon-close");
+  const toggle = document.getElementById("nav-mobile-toggle");
+
+  panel?.classList.add("translate-x-full");
+  panel?.setAttribute("aria-hidden", "true");
+  toggle?.setAttribute("aria-expanded", "false");
+  iconMenu?.classList.remove("hidden");
+  iconClose?.classList.add("hidden");
+
+  overlay?.classList.add("opacity-0", "pointer-events-none");
+  overlay?.classList.remove("opacity-100");
+  document.body.style.overflow = "";
+}
+
 function handleNavClick(e: Event, id: string) {
   e.preventDefault();
   if (suppressTimer) {
@@ -132,16 +168,7 @@ function handleNavClick(e: Event, id: string) {
   setNavActive(id);
   suppressSpy = true;
   scrollToSection(id);
-
-  const panel = document.getElementById("nav-mobile-panel");
-  const iconMenu = document.getElementById("nav-icon-menu");
-  const iconClose = document.getElementById("nav-icon-close");
-  const toggle = document.getElementById("nav-mobile-toggle");
-  panel?.classList.add("translate-x-full");
-  panel?.setAttribute("aria-hidden", "true");
-  iconMenu?.classList.remove("hidden");
-  iconClose?.classList.add("hidden");
-  toggle?.setAttribute("aria-expanded", "false");
+  closeMobileMenu();
 
   suppressTimer = setTimeout(() => {
     suppressSpy = false;
@@ -159,30 +186,28 @@ function initNavbar() {
   });
 
   const toggle = document.getElementById("nav-mobile-toggle");
+  const overlay = document.getElementById("nav-mobile-overlay");
   const panel = document.getElementById("nav-mobile-panel");
-  const iconMenu = document.getElementById("nav-icon-menu");
-  const iconClose = document.getElementById("nav-icon-close");
 
   toggle?.addEventListener("click", () => {
     const closed = panel?.classList.contains("translate-x-full");
     if (closed) {
-      panel?.classList.remove("translate-x-full");
-      panel?.setAttribute("aria-hidden", "false");
-      toggle.setAttribute("aria-expanded", "true");
-      iconMenu?.classList.add("hidden");
-      iconClose?.classList.remove("hidden");
+      openMobileMenu();
     } else {
-      panel?.classList.add("translate-x-full");
-      panel?.setAttribute("aria-hidden", "true");
-      toggle.setAttribute("aria-expanded", "false");
-      iconMenu?.classList.remove("hidden");
-      iconClose?.classList.add("hidden");
+      closeMobileMenu();
     }
+  });
+
+  overlay?.addEventListener("click", () => {
+    closeMobileMenu();
   });
 
   updateNavBar();
   window.addEventListener("scroll", updateNavBar, { passive: true });
-  window.addEventListener("resize", updateNavBar, { passive: true });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 1024) closeMobileMenu();
+    updateNavBar();
+  }, { passive: true });
 }
 
 function initScrollToHash() {

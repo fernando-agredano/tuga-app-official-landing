@@ -4,7 +4,7 @@ import { Apple, PlayCircle } from "@lucide/astro";
 
 <section
   id="hero-section"
-  class="relative min-h-screen overflow-hidden bg-black pt-10 md:pt-14 dot-grid"
+  class="relative overflow-hidden bg-black pt-32 pb-14 md:min-h-screen md:pt-14 md:pb-0 dot-grid"
 >
   <div
     class="pointer-events-none absolute top-1/2 left-1/2 h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/4 blur-[80px]"
@@ -12,7 +12,7 @@ import { Apple, PlayCircle } from "@lucide/astro";
   </div>
 
   <div
-    class="container relative z-10 mx-auto flex min-h-screen -mt-8 items-center justify-center px-4 md:-mt-12"
+    class="container relative z-10 mx-auto flex items-center justify-center px-6 md:px-4 md:min-h-screen md:-mt-12"
   >
     <div class="mx-auto w-full max-w-2xl text-center">
       <div
@@ -25,7 +25,7 @@ import { Apple, PlayCircle } from "@lucide/astro";
 
       <h1
         data-hero-title
-        class="mb-5 text-4xl font-black tracking-tighter text-white opacity-0 leading-[0.95] md:text-6xl lg:text-7xl"
+        class="mb-5 text-3xl font-black tracking-tighter text-white opacity-0 leading-[0.95] md:text-6xl lg:text-7xl"
       >
         Tu comida favorita,{" "}
         <span
@@ -49,17 +49,17 @@ import { Apple, PlayCircle } from "@lucide/astro";
       >
         <button
           type="button"
-          class="glass-button inline-flex h-14 items-center justify-center rounded-full px-8 text-lg font-bold transition-transform hover:scale-[1.02]"
+          class="glass-button inline-flex h-11 items-center justify-center rounded-full px-6 text-sm font-bold transition-transform hover:scale-[1.02] md:h-14 md:px-8 md:text-lg"
         >
-          <Apple class="mr-2 h-5 w-5 fill-current" aria-hidden="true" />
+          <Apple class="mr-2 h-4 w-4 fill-current md:h-5 md:w-5" aria-hidden="true" />
           Descargar para iOS
         </button>
 
         <button
           type="button"
-          class="inline-flex h-14 items-center justify-center rounded-full border border-zinc-800 px-8 text-lg font-bold text-zinc-400 transition-all hover:scale-[1.02] hover:border-tuga-brand/40 hover:bg-tuga-brand/10 hover:text-tuga-brand"
+          class="inline-flex h-11 items-center justify-center rounded-full border border-zinc-800 px-6 text-sm font-bold text-zinc-400 transition-all hover:scale-[1.02] hover:border-tuga-brand/40 hover:bg-tuga-brand/10 hover:text-tuga-brand md:h-14 md:px-8 md:text-lg"
         >
-          <PlayCircle class="mr-2 h-5 w-5" aria-hidden="true" />
+          <PlayCircle class="mr-2 h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
           Descargar para Android
         </button>
       </div>

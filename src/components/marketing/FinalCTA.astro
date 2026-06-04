@@ -45,7 +45,7 @@ const stats = [
 ---
 
 <section id="support" class="scroll-target overflow-hidden bg-black py-24 dot-grid">
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto px-6 md:px-4">
     <div
       class="relative overflow-hidden rounded-[4rem] border border-white/5 bg-zinc-900/40 text-white backdrop-blur-xl"
     >
@@ -63,7 +63,7 @@ const stats = [
       >
         <div class="max-w-2xl">
           <h2
-            class="mb-6 text-center text-3xl font-black tracking-tighter leading-[1.05] md:text-5xl xl:text-6xl lg:text-left"
+            class="mb-6 text-center text-2xl font-black tracking-tighter leading-[1.05] md:text-5xl xl:text-6xl lg:text-left"
           >
             El futuro de <br />
             <span class="text-tuga-brand">la entrega</span> está aquí.
@@ -125,9 +125,9 @@ const stats = [
                         </div>
                       </div>
 
-                      <div class="hidden h-20 w-28 shrink-0 items-end justify-end gap-2 self-stretch sm:flex md:w-32">
+                      <div class="flex h-14 w-16 shrink-0 items-end gap-1 sm:h-20 sm:w-28 sm:gap-2 md:w-32">
                         {stat.chart.map((item) => (
-                          <div class="group/bar relative flex h-20 flex-1 items-end">
+                          <div class="group/bar relative flex h-full flex-1 items-end">
                             <div class="pointer-events-none absolute -top-14 left-1/2 z-20 -translate-x-1/2 translate-y-1 whitespace-nowrap opacity-0 transition-all duration-200 group-hover/bar:translate-y-0 group-hover/bar:opacity-100">
                               <div class="rounded-xl border border-white/10 bg-zinc-950/95 px-3 py-2 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur-md">
                                 <div class="mb-1 text-[10px] tracking-[0.18em] text-zinc-500 uppercase">

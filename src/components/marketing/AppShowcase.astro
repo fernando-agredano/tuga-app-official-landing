@@ -20,16 +20,16 @@ const icons = [Smartphone, Zap, ShieldCheck];
 ---
 
 <section id="features" class="scroll-target overflow-hidden bg-zinc-950 py-24">
-  <div class="container mx-auto px-4">
+  <div class="container mx-auto px-6 md:px-4">
     <div
       data-explora-animate
       class="flex w-full flex-col gap-12 opacity-0 lg:flex-row lg:items-center lg:gap-14 xl:gap-16"
     >
       <div class="w-full min-w-0 lg:w-1/2">
-        <h2 class="mb-4 text-sm font-bold tracking-[0.3em] text-zinc-500 uppercase">
+        <h2 class="mb-4 text-sm font-bold tracking-[0.3em] text-zinc-500 uppercase text-center lg:text-left">
           Explora
         </h2>
-        <h3 class="mb-5 text-4xl font-bold tracking-tight text-white md:text-6xl">
+        <h3 class="mb-5 text-3xl font-bold tracking-tight text-white md:text-6xl text-center lg:text-left">
           Los restaurantes de siempre{" "}
           <span
             class="bg-gradient-to-r from-zinc-200 to-zinc-600 bg-clip-text text-transparent"
@@ -37,7 +37,7 @@ const icons = [Smartphone, Zap, ShieldCheck];
             ahora en la palma de tu mano
           </span>
         </h3>
-        <p class="mb-10 text-base leading-relaxed text-zinc-400 md:text-lg">
+        <p class="mb-10 text-base leading-relaxed text-zinc-400 md:text-lg text-center lg:text-left">
           Explora una amplia variedad de restaurantes locales; olvídate de tener
           que buscar el número de cualquier lugar. Todo en la palma de tu mano:
           tus lugares favoritos y hasta los que no conocías, ahora a un clic de
@@ -47,17 +47,17 @@ const icons = [Smartphone, Zap, ShieldCheck];
         <div
           class="rounded-[1.65rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-md"
         >
-          <p class="mb-3 text-xs font-bold tracking-[0.28em] text-zinc-500 uppercase">
+          <p class="mb-3 text-xs font-bold tracking-[0.28em] text-zinc-500 uppercase text-center lg:text-left">
             Delivery
           </p>
-          <h4 class="mb-3 text-2xl font-bold tracking-tight text-white md:text-3xl">
+          <h4 class="mb-3 text-2xl font-bold tracking-tight text-white md:text-3xl text-center lg:text-left">
             Pide fácil, recibe rápido
           </h4>
-          <p class="mb-5 text-sm leading-relaxed text-zinc-400 md:text-base">
+          <p class="mb-5 text-sm leading-relaxed text-zinc-400 md:text-base text-center lg:text-left">
             Deja las explicaciones largas para que den con tu domicilio:
             simplemente establece la ubicación desde la app y recibe en minutos.
           </p>
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
             <span
               class="rounded-full border border-white/10 bg-black/30 px-3 py-1.5 text-xs font-medium text-zinc-300"
             >
@@ -78,7 +78,7 @@ const icons = [Smartphone, Zap, ShieldCheck];
             features.map((f, i) => {
               const Icon = icons[i];
               return (
-                <div class="flex gap-6">
+                <div class="flex flex-col items-center gap-4 text-center lg:flex-row lg:items-start lg:gap-6 lg:text-left">
                   <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white">
                     <Icon size={24} stroke-width={1.5} />
                   </div>
