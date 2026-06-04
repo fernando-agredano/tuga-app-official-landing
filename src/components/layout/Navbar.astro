@@ -9,11 +9,12 @@ const navTop =
 
 <nav id="site-nav" class:list={[navTop, "invisible"]} aria-label="Principal">
   <div class="relative z-10 container mx-auto px-4">
-    <div class="flex min-h-[3rem] items-center justify-between gap-4">
-      <TugaBrandLogo class="shrink-0 py-0.5" />
+    <div class="flex min-h-[3rem] items-center gap-4">
+      <TugaBrandLogo class="shrink-0 flex-none py-0.5" />
 
+      <!-- Links centered -->
       <div
-        class="hidden min-w-0 flex-1 items-center justify-end gap-x-5 lg:flex xl:gap-x-7"
+        class="hidden flex-1 items-center justify-center gap-x-5 lg:flex xl:gap-x-7"
       >
         {
           NAV_LINKS.map(({ id, label }) => {
@@ -35,16 +36,18 @@ const navTop =
             );
           })
         }
+      </div>
 
+      <!-- CTA + mobile toggle -->
+      <div class="flex flex-none items-center gap-3 ml-auto lg:ml-0">
         <button
           type="button"
           data-scroll-to="support"
           data-cta-desktop
-          class="rounded-full font-bold h-11 px-6 xl:px-7 text-sm uppercase tracking-wide shrink-0 transition-colors border glass-button border-white/15"
+          class="hidden rounded-xl font-bold h-11 px-6 xl:px-7 text-sm uppercase tracking-wide transition-colors border glass-button border-white/15 lg:flex"
         >
           Comenzar
         </button>
-      </div>
 
       <button
         type="button"
@@ -60,6 +63,7 @@ const navTop =
           <X class="h-6 w-6" aria-hidden="true" />
         </span>
       </button>
+      </div>
     </div>
   </div>
 </nav>
