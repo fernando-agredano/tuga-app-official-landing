@@ -54,8 +54,8 @@
     transition: all 0.3s ease;
   }
 
-  /* Hover only on desktop */
-  @media (min-width: 1024px) {
+  /* Hover only on devices that truly support it (mouse/trackpad) */
+  @media (hover: hover) and (pointer: fine) {
     .glass-button:hover {
       background-color: rgba(24, 32, 25, 0.78);
       border-color: color-mix(in oklab, #73946a 55%, transparent);
@@ -74,5 +74,12 @@
   }
   .glass-button:active svg {
     color: #73946a;
+  }
+
+  /* Suppress hover transforms on touch devices */
+  @media (hover: none) {
+    *:hover {
+      transform: none !important;
+    }
   }
 }
