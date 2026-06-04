@@ -106,13 +106,13 @@ import { Apple, PlayCircle, Rocket, Zap, Store, Star } from "@lucide/astro";
   role="dialog"
   aria-modal="true"
   aria-hidden="true"
-  class="fixed inset-0 z-[500] flex items-center justify-center px-6 opacity-0 pointer-events-none transition-opacity duration-300"
+  class="fixed inset-0 z-[500] hidden flex items-center justify-center px-6"
 >
-  <div id="modal-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-md"></div>
+  <div id="modal-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-md opacity-0 transition-opacity duration-200"></div>
 
   <div
     id="modal-card"
-    class="relative z-10 w-full max-w-[340px] scale-95 overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950 shadow-[0_30px_80px_rgba(0,0,0,0.6),0_0_60px_rgba(115,148,106,0.12)] transition-transform duration-300"
+    class="relative z-10 w-full max-w-[340px] scale-95 opacity-0 overflow-hidden rounded-[2rem] border border-white/10 bg-zinc-950 shadow-[0_30px_80px_rgba(0,0,0,0.6),0_0_60px_rgba(115,148,106,0.12)] transition-all duration-300"
   >
     <!-- Top accent line -->
     <div class="h-px w-full bg-gradient-to-r from-transparent via-tuga-brand/70 to-transparent"></div>
@@ -159,19 +159,25 @@ import { Apple, PlayCircle, Rocket, Zap, Store, Star } from "@lucide/astro";
   const closeBtn  = document.getElementById("modal-close-btn");
 
   function openModal() {
-    modal?.classList.remove("opacity-0", "pointer-events-none");
+    modal?.classList.remove("hidden");
     modal?.setAttribute("aria-hidden", "false");
-    card?.classList.remove("scale-95");
-    card?.classList.add("scale-100");
     document.body.style.overflow = "hidden";
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      backdrop?.classList.remove("opacity-0");
+      card?.classList.remove("scale-95", "opacity-0");
+      card?.classList.add("scale-100");
+    }));
   }
 
   function closeModal() {
-    modal?.classList.add("opacity-0", "pointer-events-none");
-    modal?.setAttribute("aria-hidden", "true");
     card?.classList.remove("scale-100");
-    card?.classList.add("scale-95");
-    document.body.style.overflow = "";
+    card?.classList.add("scale-95", "opacity-0");
+    backdrop?.classList.add("opacity-0");
+    setTimeout(() => {
+      modal?.classList.add("hidden");
+      modal?.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }, 300);
   }
 
   document.querySelectorAll("[data-open-modal]").forEach((btn) => {
